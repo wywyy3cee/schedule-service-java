@@ -28,5 +28,4 @@ public class SchoolClassController {
         }
         return result;
     }
-
 }

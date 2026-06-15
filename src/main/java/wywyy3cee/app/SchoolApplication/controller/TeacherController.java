@@ -1,9 +1,11 @@
 package wywyy3cee.app.SchoolApplication.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import wywyy3cee.app.SchoolApplication.dto.TeacherDto;
+import wywyy3cee.app.SchoolApplication.dto.TeacherRequest;
 import wywyy3cee.app.SchoolApplication.model.Teacher;
 import wywyy3cee.app.SchoolApplication.service.TeacherService;
 
@@ -30,4 +32,20 @@ public class TeacherController {
         return result;
     }
 
+    @PostMapping
+    public ResponseEntity<TeacherDto> create(@RequestBody TeacherRequest request) {
+        TeacherDto dto = teacherService.create(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+    }
+
+    @PutMapping("/{id}")
+    public TeacherDto update(@PathVariable Long id, @RequestBody TeacherRequest request) {
+        return teacherService.update(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        teacherService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
