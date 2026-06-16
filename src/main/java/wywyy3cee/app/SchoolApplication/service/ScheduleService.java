@@ -1,6 +1,7 @@
 package wywyy3cee.app.SchoolApplication.service;
 
 import org.springframework.stereotype.Service;
+import wywyy3cee.app.SchoolApplication.exception.NotFoundException;
 import wywyy3cee.app.SchoolApplication.model.Schedule;
 import wywyy3cee.app.SchoolApplication.model.SchoolClass;
 import wywyy3cee.app.SchoolApplication.repository.ScheduleRepository;
@@ -22,7 +23,7 @@ public class ScheduleService {
 
     public List<Schedule> getSchedule(Long classId, LocalDate date) {
         SchoolClass schoolClass = schoolClassRepository.findById(classId).orElseThrow(() ->
-                new RuntimeException("Class not found"));
+                new NotFoundException("Class not found"));
         DayOfWeek dayOfWeek = date.getDayOfWeek();
         return scheduleRepository.findByDayOfWeekAndSchoolClass(dayOfWeek, schoolClass);
     }

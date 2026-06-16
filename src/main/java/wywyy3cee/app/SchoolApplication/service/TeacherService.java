@@ -3,6 +3,7 @@ package wywyy3cee.app.SchoolApplication.service;
 import org.springframework.stereotype.Service;
 import wywyy3cee.app.SchoolApplication.dto.TeacherDto;
 import wywyy3cee.app.SchoolApplication.dto.TeacherRequest;
+import wywyy3cee.app.SchoolApplication.exception.NotFoundException;
 import wywyy3cee.app.SchoolApplication.model.Teacher;
 import wywyy3cee.app.SchoolApplication.repository.TeacherRepository;
 
@@ -32,7 +33,7 @@ public class TeacherService {
 
     public TeacherDto update(Long id, TeacherRequest request) {
         Teacher teacher = teacherRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Teacher not found"));
+                .orElseThrow(() -> new NotFoundException("Teacher not found"));
         teacher.setFirstName(request.getFirstName());
         teacher.setLastName(request.getLastName());
         teacher.setMiddleName(request.getMiddleName());
@@ -44,7 +45,7 @@ public class TeacherService {
 
     public void delete(Long id) {
         Teacher teacher = teacherRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Id of teacher is not found"));
+                .orElseThrow(() -> new NotFoundException("Id of teacher is not found"));
         teacherRepository.deleteById(id);
     }
 }
