@@ -23,7 +23,7 @@ public class ScheduleService {
     private final TeacherRepository teacherRepository;
 
     public ScheduleService(ScheduleRepository scheduleRepository,
-                           SchoolClassRepository schoolClassRepositor   y,
+                           SchoolClassRepository schoolClassRepository,
                            TeacherRepository teacherRepository){
         this.scheduleRepository = scheduleRepository;
         this.schoolClassRepository = schoolClassRepository;

@@ -1,7 +1,10 @@
 package wywyy3cee.app.SchoolApplication.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import wywyy3cee.app.SchoolApplication.dto.ScheduleItemDto;
+import wywyy3cee.app.SchoolApplication.dto.ScheduleRequest;
 import wywyy3cee.app.SchoolApplication.model.Schedule;
 import wywyy3cee.app.SchoolApplication.service.ScheduleService;
 
@@ -32,6 +35,13 @@ public class ScheduleController {
 
         }
         return result;
+    }
+
+    @PostMapping
+    public ResponseEntity<ScheduleItemDto> create(@PathVariable Long id,
+                                                  @RequestBody ScheduleRequest request) {
+        ScheduleItemDto dto = scheduleService.create(id, request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
 }
