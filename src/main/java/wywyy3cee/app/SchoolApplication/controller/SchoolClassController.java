@@ -1,6 +1,7 @@
 package wywyy3cee.app.SchoolApplication.controller;
 
-import org.apache.coyote.Response;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import wywyy3cee.app.SchoolApplication.service.SchoolClassService;
 import java.util.ArrayList;
 import java.util.List;
 
+@Tag(name = "SchoolClass", description = "Group class management")
 @RestController
 @RequestMapping("/api/classes")
 public class SchoolClassController {
@@ -21,6 +23,7 @@ public class SchoolClassController {
         this.schoolClassService = schoolClassService;
     }
 
+    @Operation(summary = "Get all school group numbers")
     @GetMapping
     public List<SchoolDto> getAll(){
         List<SchoolClass> classes = schoolClassService.getAllClasses();
@@ -31,17 +34,20 @@ public class SchoolClassController {
         return result;
     }
 
+    @Operation(summary = "Add a new school group")
     @PostMapping
     public ResponseEntity<SchoolDto> create(@RequestBody SchoolRequest request) {
         SchoolDto dto = schoolClassService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @Operation(summary = "Update group number by Path parameter id")
     @PutMapping("/{id}")
     public SchoolDto update(@PathVariable Long id, @RequestBody SchoolRequest request) {
         return schoolClassService.update(id, request);
     }
 
+    @Operation(summary = "Deleting a group number by ID")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         schoolClassService.delete(id);

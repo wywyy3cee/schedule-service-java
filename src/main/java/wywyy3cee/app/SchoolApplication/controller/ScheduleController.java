@@ -1,5 +1,7 @@
 package wywyy3cee.app.SchoolApplication.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Tag(name = "Schedule", description = "Schedule management")
 @RestController
 @RequestMapping("/api/classes/{id}/schedule")
 public class ScheduleController {
@@ -22,6 +26,7 @@ public class ScheduleController {
         this.scheduleService = scheduleService;
     }
 
+    @Operation(summary = "Retrieve the schedule by ID via a path parameter.")
     @GetMapping
     public List<ScheduleItemDto> getScheduleById(@PathVariable Long id, @RequestParam LocalDate date){
         List<Schedule> scheduleList = scheduleService.getSchedule(id, date);
@@ -37,6 +42,7 @@ public class ScheduleController {
         return result;
     }
 
+    @Operation(summary = "Add a new schedule")
     @PostMapping
     public ResponseEntity<ScheduleItemDto> create(@PathVariable Long id,
                                                   @RequestBody ScheduleRequest request) {

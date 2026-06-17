@@ -1,5 +1,7 @@
 package wywyy3cee.app.SchoolApplication.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -9,9 +11,11 @@ import wywyy3cee.app.SchoolApplication.dto.TeacherRequest;
 import wywyy3cee.app.SchoolApplication.model.Teacher;
 import wywyy3cee.app.SchoolApplication.service.TeacherService;
 
+import javax.swing.plaf.SeparatorUI;
 import java.util.ArrayList;
 import java.util.List;
 
+@Tag(name = "Teachers", description = "Teacher management")
 @RestController
 @RequestMapping("/api/teachers")
 public class TeacherController {
@@ -21,6 +25,7 @@ public class TeacherController {
         this.teacherService = teacherService;
     }
 
+    @Operation(summary = "Get information about all teachers")
     @GetMapping
     public List<TeacherDto> getAll() {
         List<Teacher> teachers = teacherService.getAllTeachers();
@@ -32,17 +37,20 @@ public class TeacherController {
         return result;
     }
 
+    @Operation(summary = "Add a new teacher")
     @PostMapping
     public ResponseEntity<TeacherDto> create(@RequestBody TeacherRequest request) {
         TeacherDto dto = teacherService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
+    @Operation(summary = "Update teacher info by Path parameter id")
     @PutMapping("/{id}")
     public TeacherDto update(@PathVariable Long id, @RequestBody TeacherRequest request) {
         return teacherService.update(id, request);
     }
 
+    @Operation(summary = "Deleting a teacher by ID")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         teacherService.delete(id);
