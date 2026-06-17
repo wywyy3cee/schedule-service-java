@@ -25,14 +25,14 @@ public class TeacherController {
         this.teacherService = teacherService;
     }
 
-    @Operation(summary = "Get information about all teachers")
+    @Operation(summary = "Get information about all teachers with optional parameter")
     @GetMapping
-    public List<TeacherDto> getAll() {
-        List<Teacher> teachers = teacherService.getAllTeachers();
+    public List<TeacherDto> getAll(@RequestParam(required = false) String subject) {
+        List<Teacher> teachers = teacherService.getAllTeachers(subject);
         List<TeacherDto> result = new ArrayList<>();
         for (Teacher t: teachers) {
             result.add(new TeacherDto(t.getId(), t.getFirstName(),
-                    t.getLastName(), t.getMiddleName()));
+                    t.getLastName(), t.getMiddleName(), t.getSubject()));
         }
         return result;
     }

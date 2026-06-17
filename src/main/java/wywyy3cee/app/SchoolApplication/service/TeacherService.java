@@ -17,7 +17,10 @@ public class TeacherService {
         this.teacherRepository = teacherRepository;
     }
 
-    public List<Teacher> getAllTeachers() {
+    public List<Teacher> getAllTeachers(String subject) {
+        if (subject != null && !subject.isBlank()) {
+            return teacherRepository.findBySubjectContainingIgnoreCase(subject);
+        }
         return teacherRepository.findAll();
     }
 
@@ -26,9 +29,10 @@ public class TeacherService {
         teacher.setFirstName(request.getFirstName());
         teacher.setLastName(request.getLastName());
         teacher.setMiddleName(request.getMiddleName());
+        teacher.setSubject(request.getSubject());
         Teacher saved = teacherRepository.save(teacher);
         return new TeacherDto(saved.getId(),saved.getFirstName(),
-                saved.getLastName(), saved.getMiddleName());
+                saved.getLastName(), saved.getMiddleName(), saved.getSubject());
     }
 
     public TeacherDto update(Long id, TeacherRequest request) {
@@ -37,10 +41,11 @@ public class TeacherService {
         teacher.setFirstName(request.getFirstName());
         teacher.setLastName(request.getLastName());
         teacher.setMiddleName(request.getMiddleName());
+        teacher.setSubject(request.getSubject());
         Teacher saved = teacherRepository.save(teacher);
 
         return new TeacherDto(saved.getId(), saved.getFirstName(),
-                saved.getLastName(), saved.getMiddleName());
+                saved.getLastName(), saved.getMiddleName(), saved.getSubject());
     }
 
     public void delete(Long id) {

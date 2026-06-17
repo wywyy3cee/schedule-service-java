@@ -20,6 +20,8 @@ public class Teacher {
     private String lastName;
     @Column(name = "middlename")
     private String middleName;
+    @Column(name = "subject")
+    private String subject;
 
     public Teacher(String firstName, String lastName) {
         this.firstName = firstName;
