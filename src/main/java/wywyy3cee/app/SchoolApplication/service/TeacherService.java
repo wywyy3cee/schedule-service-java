@@ -1,5 +1,6 @@
 package wywyy3cee.app.SchoolApplication.service;
 
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.stereotype.Service;
 import wywyy3cee.app.SchoolApplication.dto.TeacherDto;
 import wywyy3cee.app.SchoolApplication.dto.TeacherRequest;
