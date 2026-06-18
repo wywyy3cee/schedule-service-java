@@ -12,25 +12,32 @@ REST API for managing teachers, classes, and schedules in a school system.
 - Lombok
 
 ## Prerequisites
+- Docker and Docker Compose (recommended), or
+- Java 17+, Maven 3.8+, PostgreSQL instance
 
-- Java 17+
-- Maven 3.8+
-- PostgreSQL instance (local or Docker)
+## Running with Docker
 
-## Database Setup
+The application and a PostgreSQL instance are defined as services in `docker-compose.yml`.
 
-Create a database and configure the connection in `src/main/resources/application.properties`:
-
-```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/school_db
-spring.datasource.username=your_username
-spring.datasource.password=your_password
-spring.jpa.hibernate.ddl-auto=update
+```bash
+docker-compose up --build
 ```
 
-Tables are created automatically on first run.
+This builds the application image, starts both containers, and waits for the database to be ready before starting the application. The server is available at `http://localhost:8080`.
 
-## Running the Application
+Default credentials and database name (overridable via environment variables `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`):
+
+| Variable | Default |
+|----------|---------|
+| DB_NAME | school_db |
+| DB_USER | postgres |
+| DB_PASSWORD | postgres |
+
+Tables are created automatically on first run via `ddl-auto=update`.
+
+## Running Manually
+
+Configure the connection in `src/main/resources/application.properties` or via the environment variables listed above, then run:
 
 ```bash
 mvn spring-boot:run
