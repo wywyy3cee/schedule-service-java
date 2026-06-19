@@ -140,6 +140,13 @@ Schedule is determined by the day of week derived from the provided date.
 ```
 
 ---
+## Testing
+
+Unit tests cover the service layer (business logic, conflict detection, error handling) using JUnit 5 and Mockito.
+
+```bash
+mvn test
+```
 
 ## Error Responses
 
