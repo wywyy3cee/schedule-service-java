@@ -1,4 +1,10 @@
 # School Schedule API
+![Coverage](https://img.shields.io/badge/coverage-55%25-yellow)
+
+![Java](https://img.shields.io/badge/Java%2017-ED8B00?logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot%203-6DB33F?logo=springboot&logoColor=white)
+![Hibernate](https://img.shields.io/badge/Hibernate-59666C?logo=hibernate&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
 
 REST API for managing teachers, classes, and schedules in a school system.
 
