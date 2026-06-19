@@ -144,6 +144,9 @@ Schedule is determined by the day of week derived from the provided date.
   "classroom": 101
 }
 ```
+---
+## Database structure
+![img.png](images/schoolStructure.png)
 
 ---
 ## Testing
