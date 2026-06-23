@@ -1,8 +1,8 @@
 package wywyy3cee.app.SchoolApplication.service;
 
 import org.springframework.stereotype.Service;
-import wywyy3cee.app.SchoolApplication.dto.ScheduleItemDto;
-import wywyy3cee.app.SchoolApplication.dto.ScheduleRequest;
+import wywyy3cee.app.SchoolApplication.dto.response.ScheduleItemResponse;
+import wywyy3cee.app.SchoolApplication.dto.request.ScheduleRequest;
 import wywyy3cee.app.SchoolApplication.exception.ConflictException;
 import wywyy3cee.app.SchoolApplication.exception.NotFoundException;
 import wywyy3cee.app.SchoolApplication.model.Schedule;
@@ -37,7 +37,7 @@ public class ScheduleService {
         return scheduleRepository.findByDayOfWeekAndSchoolClass(dayOfWeek, schoolClass);
     }
 
-    public ScheduleItemDto create(Long classId, ScheduleRequest request) {
+    public ScheduleItemResponse create(Long classId, ScheduleRequest request) {
         Teacher teacher = teacherRepository.findById(request.getTeacherId())
                 .orElseThrow(()-> new NotFoundException("Teacher not found"));
         SchoolClass schoolClass = schoolClassRepository.findById(classId)
@@ -60,7 +60,7 @@ public class ScheduleService {
         schedule.setSchoolClass(schoolClass);
         schedule.setEndTime(request.getEndTime());
         Schedule saved = scheduleRepository.save(schedule);
-        return new ScheduleItemDto(saved.getId(),
+        return new ScheduleItemResponse(saved.getId(),
                 saved.getSubject(),
                 saved.getTeacher().getFirstName() + " " +
                         saved.getTeacher().getLastName() +  " " +

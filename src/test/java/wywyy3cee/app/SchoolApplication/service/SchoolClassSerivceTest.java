@@ -6,8 +6,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import wywyy3cee.app.SchoolApplication.dto.SchoolDto;
-import wywyy3cee.app.SchoolApplication.dto.SchoolRequest;
+import wywyy3cee.app.SchoolApplication.dto.response.SchoolResponse;
+import wywyy3cee.app.SchoolApplication.dto.request.SchoolRequest;
 import wywyy3cee.app.SchoolApplication.exception.NotFoundException;
 import wywyy3cee.app.SchoolApplication.model.SchoolClass;
 import wywyy3cee.app.SchoolApplication.repository.SchoolClassRepository;
@@ -56,7 +56,7 @@ class SchoolClassServiceTest {
 
         when(schoolClassRepository.save(any(SchoolClass.class))).thenReturn(schoolClass);
 
-        SchoolDto dto = schoolClassService.create(request);
+        SchoolResponse dto = schoolClassService.create(request);
 
         assertThat(dto.getId()).isEqualTo(1L);
         assertThat(dto.getGroupNumber()).isEqualTo("9А");
@@ -71,7 +71,7 @@ class SchoolClassServiceTest {
         when(schoolClassRepository.save(any(SchoolClass.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
 
-        SchoolDto dto = schoolClassService.update(1L, request);
+        SchoolResponse dto = schoolClassService.update(1L, request);
 
         assertThat(dto.getGroupNumber()).isEqualTo("10Б");
     }

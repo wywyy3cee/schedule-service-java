@@ -1,9 +1,8 @@
 package wywyy3cee.app.SchoolApplication.service;
 
-import jakarta.validation.constraints.NotBlank;
 import org.springframework.stereotype.Service;
-import wywyy3cee.app.SchoolApplication.dto.TeacherDto;
-import wywyy3cee.app.SchoolApplication.dto.TeacherRequest;
+import wywyy3cee.app.SchoolApplication.dto.response.TeacherResponse;
+import wywyy3cee.app.SchoolApplication.dto.request.TeacherRequest;
 import wywyy3cee.app.SchoolApplication.exception.NotFoundException;
 import wywyy3cee.app.SchoolApplication.model.Teacher;
 import wywyy3cee.app.SchoolApplication.repository.TeacherRepository;
@@ -25,18 +24,18 @@ public class TeacherService {
         return teacherRepository.findAll();
     }
 
-    public TeacherDto create(TeacherRequest request) {
+    public TeacherResponse create(TeacherRequest request) {
         Teacher teacher = new Teacher();
         teacher.setFirstName(request.getFirstName());
         teacher.setLastName(request.getLastName());
         teacher.setMiddleName(request.getMiddleName());
         teacher.setSubject(request.getSubject());
         Teacher saved = teacherRepository.save(teacher);
-        return new TeacherDto(saved.getId(),saved.getFirstName(),
+        return new TeacherResponse(saved.getId(),saved.getFirstName(),
                 saved.getLastName(), saved.getMiddleName(), saved.getSubject());
     }
 
-    public TeacherDto update(Long id, TeacherRequest request) {
+    public TeacherResponse update(Long id, TeacherRequest request) {
         Teacher teacher = teacherRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Teacher not found"));
         teacher.setFirstName(request.getFirstName());
@@ -45,7 +44,7 @@ public class TeacherService {
         teacher.setSubject(request.getSubject());
         Teacher saved = teacherRepository.save(teacher);
 
-        return new TeacherDto(saved.getId(), saved.getFirstName(),
+        return new TeacherResponse(saved.getId(), saved.getFirstName(),
                 saved.getLastName(), saved.getMiddleName(), saved.getSubject());
     }
 

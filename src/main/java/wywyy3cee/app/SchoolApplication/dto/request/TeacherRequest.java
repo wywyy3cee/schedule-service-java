@@ -1,4 +1,4 @@
-package wywyy3cee.app.SchoolApplication.dto;
+package wywyy3cee.app.SchoolApplication.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

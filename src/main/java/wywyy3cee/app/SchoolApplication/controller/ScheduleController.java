@@ -5,8 +5,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import wywyy3cee.app.SchoolApplication.dto.ScheduleItemDto;
-import wywyy3cee.app.SchoolApplication.dto.ScheduleRequest;
+import wywyy3cee.app.SchoolApplication.dto.response.ScheduleItemResponse;
+import wywyy3cee.app.SchoolApplication.dto.request.ScheduleRequest;
 import wywyy3cee.app.SchoolApplication.model.Schedule;
 import wywyy3cee.app.SchoolApplication.service.ScheduleService;
 
@@ -28,11 +28,11 @@ public class ScheduleController {
 
     @Operation(summary = "Retrieve the schedule by ID via a path parameter.")
     @GetMapping
-    public List<ScheduleItemDto> getScheduleById(@PathVariable Long id, @RequestParam LocalDate date){
+    public List<ScheduleItemResponse> getScheduleById(@PathVariable Long id, @RequestParam LocalDate date){
         List<Schedule> scheduleList = scheduleService.getSchedule(id, date);
-        List<ScheduleItemDto> result = new ArrayList<>();
+        List<ScheduleItemResponse> result = new ArrayList<>();
         for (Schedule s: scheduleList) {
-            result.add(new ScheduleItemDto(s.getId(), s.getSubject(),
+            result.add(new ScheduleItemResponse(s.getId(), s.getSubject(),
                     s.getTeacher().getFirstName() + " " +
                                   s.getTeacher().getLastName() + " " +
                                   s.getTeacher().getMiddleName(), s.getStartTime(),
@@ -44,9 +44,9 @@ public class ScheduleController {
 
     @Operation(summary = "Add a new schedule")
     @PostMapping
-    public ResponseEntity<ScheduleItemDto> create(@PathVariable Long id,
-                                                  @RequestBody ScheduleRequest request) {
-        ScheduleItemDto dto = scheduleService.create(id, request);
+    public ResponseEntity<ScheduleItemResponse> create(@PathVariable Long id,
+                                                       @RequestBody ScheduleRequest request) {
+        ScheduleItemResponse dto = scheduleService.create(id, request);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 

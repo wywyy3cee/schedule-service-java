@@ -6,8 +6,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import wywyy3cee.app.SchoolApplication.dto.ScheduleItemDto;
-import wywyy3cee.app.SchoolApplication.dto.ScheduleRequest;
+import wywyy3cee.app.SchoolApplication.dto.response.ScheduleItemResponse;
+import wywyy3cee.app.SchoolApplication.dto.request.ScheduleRequest;
 import wywyy3cee.app.SchoolApplication.exception.ConflictException;
 import wywyy3cee.app.SchoolApplication.exception.NotFoundException;
 import wywyy3cee.app.SchoolApplication.model.Schedule;
@@ -109,7 +109,7 @@ class ScheduleServiceTest {
                 .thenReturn(false);
         when(scheduleRepository.save(any(Schedule.class))).thenReturn(schedule);
 
-        ScheduleItemDto dto = scheduleService.create(1L, request);
+        ScheduleItemResponse dto = scheduleService.create(1L, request);
 
         assertThat(dto.getSubject()).isEqualTo("Математика");
         assertThat(dto.getTeacherFullName()).isEqualTo("Иван Иванов Иванович");

@@ -6,8 +6,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import wywyy3cee.app.SchoolApplication.dto.TeacherDto;
-import wywyy3cee.app.SchoolApplication.dto.TeacherRequest;
+import wywyy3cee.app.SchoolApplication.dto.response.TeacherResponse;
+import wywyy3cee.app.SchoolApplication.dto.request.TeacherRequest;
 import wywyy3cee.app.SchoolApplication.exception.NotFoundException;
 import wywyy3cee.app.SchoolApplication.model.Teacher;
 import wywyy3cee.app.SchoolApplication.repository.TeacherRepository;
@@ -83,7 +83,7 @@ class TeacherServiceTest {
 
         when(teacherRepository.save(any(Teacher.class))).thenReturn(teacher);
 
-        TeacherDto dto = teacherService.create(request);
+        TeacherResponse dto = teacherService.create(request);
 
         assertThat(dto.getId()).isEqualTo(1L);
         assertThat(dto.getFirstName()).isEqualTo("Иван");
@@ -102,7 +102,7 @@ class TeacherServiceTest {
         when(teacherRepository.save(any(Teacher.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
 
-        TeacherDto dto = teacherService.update(1L, request);
+        TeacherResponse dto = teacherService.update(1L, request);
 
         assertThat(dto.getFirstName()).isEqualTo("Пётр");
         assertThat(dto.getSubject()).isEqualTo("Физика");

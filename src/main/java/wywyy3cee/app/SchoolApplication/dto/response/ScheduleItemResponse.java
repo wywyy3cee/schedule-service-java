@@ -1,4 +1,4 @@
-package wywyy3cee.app.SchoolApplication.dto;
+package wywyy3cee.app.SchoolApplication.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import java.time.LocalTime;
 
 @Data
 @AllArgsConstructor
-public class ScheduleItemDto {
+public class ScheduleItemResponse {
     private Long id;
     private String subject;
     private String teacherFullName;

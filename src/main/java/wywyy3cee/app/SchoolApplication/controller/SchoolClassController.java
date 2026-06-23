@@ -5,8 +5,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import wywyy3cee.app.SchoolApplication.dto.SchoolDto;
-import wywyy3cee.app.SchoolApplication.dto.SchoolRequest;
+import wywyy3cee.app.SchoolApplication.dto.response.SchoolResponse;
+import wywyy3cee.app.SchoolApplication.dto.request.SchoolRequest;
 import wywyy3cee.app.SchoolApplication.model.SchoolClass;
 import wywyy3cee.app.SchoolApplication.service.SchoolClassService;
 
@@ -25,25 +25,25 @@ public class SchoolClassController {
 
     @Operation(summary = "Get all school group numbers")
     @GetMapping
-    public List<SchoolDto> getAll(){
+    public List<SchoolResponse> getAll(){
         List<SchoolClass> classes = schoolClassService.getAllClasses();
-        List<SchoolDto> result = new ArrayList<>();
+        List<SchoolResponse> result = new ArrayList<>();
         for (SchoolClass c : classes) {
-            result.add(new SchoolDto(c.getId(), c.getGroupNumber()));
+            result.add(new SchoolResponse(c.getId(), c.getGroupNumber()));
         }
         return result;
     }
 
     @Operation(summary = "Add a new school group")
     @PostMapping
-    public ResponseEntity<SchoolDto> create(@RequestBody SchoolRequest request) {
-        SchoolDto dto = schoolClassService.create(request);
+    public ResponseEntity<SchoolResponse> create(@RequestBody SchoolRequest request) {
+        SchoolResponse dto = schoolClassService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @Operation(summary = "Update group number by Path parameter id")
     @PutMapping("/{id}")
-    public SchoolDto update(@PathVariable Long id, @RequestBody SchoolRequest request) {
+    public SchoolResponse update(@PathVariable Long id, @RequestBody SchoolRequest request) {
         return schoolClassService.update(id, request);
     }
 
